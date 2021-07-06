@@ -1,10 +1,4 @@
-/*
- ██████ ██      ██ ███████ ███    ██ ████████ 
-██      ██      ██ ██      ████   ██    ██    
-██      ██      ██ █████   ██ ██  ██    ██    
-██      ██      ██ ██      ██  ██ ██    ██    
- ██████ ███████ ██ ███████ ██   ████    ██    
-*/
+
 
 "use strict"; // https://www.w3schools.com/js/js_strict.asp 
 
@@ -16,16 +10,6 @@ const fileSharingImg = "../images/illustration-section-01.svg";
 const aboutImg = "../images/about.png";
 const peerLoockupUrl = "https://extreme-ip-lookup.com/json/";
 const avatarApiUrl = "https://eu.ui-avatars.com/api";
-/*const notifyBySound = true;*/ // turn on - off sound notifications
-/* const notifyAddPeer = "../audio/addPeer.mp3";
-const notifyDownload = "../audio/download.mp3";
-const notifyKickedOut = "../audio/kickedOut.mp3";
-const notifyRemovePeer = "../audio/removePeer.mp3";
-const notifyNewMessage = "../audio/newMessage.mp3";
-const notifyRecStart = "../audio/recStart.mp3";
-const notifyRecStop = "../audio/recStop.mp3";
-const notifyRaiseHand = "../audio/raiseHand.mp3"; 
-const notifyError = "../audio/error.mp3"; */
 const fileSharingInput = "*"; // allow all file extensions
 // "image/*,.mp3,.doc,.docs,.txt,.pdf,.xls,.xlsx,.csv,.pcap,.xml,.json,.md,.html,.js,.css,.php,.py,.sh,.zip,.rar,.tar"; // "*"
 const isWebRTCSupported = DetectRTC.isWebRTCSupported;
@@ -98,14 +82,12 @@ let audioToggleBtn;
 let videoToggleBtn;
 /*let swapCameraBtn;*/
 let shareScreenBtn;
-let recordScreenBtn;
+/*let recordScreenBtn;*/
 let fullScreenBtn;
 let chatRoomBtn;
 let myHandBtn;
 let whiteboardBtn;
 let fileShareBtn;
-/*let mySettingsBtn;
-let aboutBtn; */
 let leaveRoomBtn;
 // chat room elements
 let messengerDrag;
@@ -129,18 +111,6 @@ let messengerEmojiPicker;
 let messengerEmojiHeader;
 let messengerCloseEmojiBtn;
 let emojiPicker;
-// my settings
-/*let mySettings;
-let mySettingsHeader;
-let mySettingsCloseBtn;
-let myPeerNameSet;
-let myPeerNameSetBtn;
-let audioInputSelect;
-let audioOutputSelect;
-let videoSelect;
-let themeSelect;
-let selectors;*/
-// my video element
 let myVideo;
 // name && hand video audio status
 let myVideoParagraph;
@@ -198,16 +168,13 @@ function getHtmlElementsById() {
   shareTeamBtn = getId("shareTeamBtn");
   audioToggleBtn = getId("audioToggleBtn");
   videoToggleBtn = getId("videoToggleBtn");
-  /*swapCameraBtn = getId("swapCameraBtn");*/
   shareScreenBtn = getId("shareScreenBtn");
-  recordScreenBtn = getId("recordScreenBtn");
+  /*recordScreenBtn = getId("recordScreenBtn");*/
   fullScreenBtn = getId("fullScreenBtn");
   chatRoomBtn = getId("chatRoomBtn");
   whiteboardBtn = getId("whiteboardBtn");
   fileShareBtn = getId("fileShareBtn");
   myHandBtn = getId("myHandBtn");
-  /* mySettingsBtn = getId("mySettingsBtn");
-  aboutBtn = getId("aboutBtn"); */
   leaveRoomBtn = getId("leaveRoomBtn");
   // chat Room elements
   messengerDrag = getId("messengerDrag");
@@ -292,10 +259,10 @@ function setButtonsTitle() {
     content: "Share your screen",
     placement: "right-start",
   });
-  tippy(recordScreenBtn, {
+  /*tippy(recordScreenBtn, {
     content: "START recording",
     placement: "right-start",
-  });
+  });*/
   tippy(fullScreenBtn, {
     content: "VIEW full screen",
     placement: "right-start",
@@ -1572,7 +1539,7 @@ function startCountTime() {
 /**
  * Start recording time
  */
-function startRecordingTime() {
+/*function startRecordingTime() {
   recStartTime = Date.now();
   let rc = setInterval(function printTime() {
     if (isStreamRecording) {
@@ -1583,7 +1550,7 @@ function startRecordingTime() {
     }
     clearInterval(rc);
   }, 1000);
-}
+}*/
 
 /**
  * Return time to string
@@ -1611,7 +1578,7 @@ function manageLeftButtons() {
   setVideoToggleBtn();
   /*setSwapCameraBtn();*/
   setShareScreenBtn();
-  setRecordScreenBtn();
+  /*setRecordScreenBtn();*/
   setFullScreenBtn();
   setChatRoomBtn();
   setChatEmojiBtn();
@@ -1690,18 +1657,18 @@ function setShareScreenBtn() {
 /**
  * Start - Stop Stream recording
  */
-function setRecordScreenBtn() {
+/*function setRecordScreenBtn() {
   recordScreenBtn.addEventListener("click", (e) => {
     if (isStreamRecording) {
-      /*playSound("recStop");*/
+      playSound("recStop");
       stopStreamRecording();
     } else {
-      /*playSound("recStart");*/
+      playSound("recStart");
       startStreamRecording();
     }
   });
 }
-
+*/
 /**
  * Full screen button click event
  */
@@ -2419,13 +2386,9 @@ function toggleScreenSharing() {
     }
   } else {
     // on screen sharing stop
-    const audioSource = audioInputSelect.value;
-    const videoSource = videoSelect.value;
-    const constraints = {
-      audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
-      video: { deviceId: videoSource ? { exact: videoSource } : undefined },
-    };
-    screenMediaPromise = navigator.mediaDevices.getUserMedia(constraints);
+    screenMediaPromise = navigator.mediaDevices.getUserMedia(
+      getAudioVideoConstraints()
+    );
     // if screen sharing accidentally closed
     if (isStreamRecording) {
       stopStreamRecording();
@@ -2572,7 +2535,7 @@ function handleDataAvailable(event) {
  * Start Recording
  * https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/record
  */
-function startStreamRecording() {
+/*function startStreamRecording() {
   recordedBlobs = [];
   let options = { mimeType: "video/webm;codecs=vp9,opus" };
   if (!MediaRecorder.isTypeSupported(options.mimeType)) {
@@ -2632,7 +2595,7 @@ function startStreamRecording() {
 /**
  * Stop recording
  */
-function stopStreamRecording() {
+/*function stopStreamRecording() {
   mediaRecorder.stop();
   isStreamRecording = false;
   setRecordButtonUi();
@@ -2641,7 +2604,7 @@ function stopStreamRecording() {
 /**
  * Set Record Button UI on change theme
  */
-function setRecordButtonUi() {
+/*function setRecordButtonUi() {
   if (microsoftTeams == "ghost") {
     recordScreenBtn.style.setProperty("background-color", "transparent");
   } else {
@@ -2652,7 +2615,7 @@ function setRecordButtonUi() {
 /**
  * Download recorded stream
  */
-function downloadRecordedStream() {
+/*function downloadRecordedStream() {
   try {
     const blob = new Blob(recordedBlobs, { type: "video/webm" });
     const recFileName = getDataTimeString() + "-REC.webm";

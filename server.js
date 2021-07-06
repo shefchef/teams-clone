@@ -114,7 +114,7 @@ app.get("/join/*", (req, res) => {
   The response will give you a entrypoint / Room URL for your meeting.
 */
 app.post(["/api/v1/meeting"], (req, res) => {
-  // check if user was authorized for the api call
+  // checking if the user was authorised for the call
   let authorization = req.headers.authorization;
   if (authorization != API_KEY_SECRET) {
     logme("Microsoft Teams get meeting - Unauthorized", {
