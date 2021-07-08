@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------
-# Fade in page on load 
+# Fade in page when page loads 
 --------------------------------------------------------------*/
 
 @-webkit-keyframes fadeIn {
@@ -30,7 +30,7 @@
 }
 
 /*--------------------------------------------------------------
-# Root settings
+# Root
 --------------------------------------------------------------*/
 
 :root {
@@ -66,73 +66,6 @@
   --wb-hbg: #464EB8;
   --my-settings-label-color: white; 
 
-  /* dark theme
-  --body-bg: #16171b;
-  --messenger-bg: #16171b;
-  --messenger-private-bg: black;
-  --left-message-bg: #222328;
-  --private-msg-bg: #f77070;
-  --right-msg-bg: #0a0b0c;
-  --box-shadow: 3px 3px 6px #0a0b0c, -3px -3px 6px #222328; 
-  --btn-bg: white;
-  --btn-color: black;
-  --btn-opc: 1;
-  --btns-left: 20px;
-  --wb-bg: #000000;
-  --wb-hbg: #000000;
-  --my-settings-label-color: limegreen;
-  */
-
-  /* forest theme
-  --body-bg: black;
-  --messenger-bg: black;
-  --messenger-private-bg: black;
-  --left-message-bg: #2e3500;
-  --private-msg-bg: #f77070;
-  --right-msg-bg: #004b1c;
-  --box-shadow: 3px 3px 6px #27944f, -3px -3px 6px #14843d;
-  --btn-bg: white;
-  --btn-color: black;
-  --btn-opc: 1;
-  --btns-left: 20px;
-  --wb-bg: #000000;
-  --wb-hbg: #000000;
-  --my-settings-label-color: limegreen;
-  */
-
-  /* sky theme
-  --body-bg: black;
-  --messenger-bg: black;
-  --messenger-private-bg: black;
-  --left-message-bg: #0c95b7;
-  --private-msg-bg: #f77070;
-  --right-msg-bg: #012a5f;
-  --box-shadow: 3px 3px 6px #03a5ce, -3px -3px 6px #03a5ce;
-  --btn-bg: white;
-  --btn-color: black;
-  --btn-opc: 1;
-  --btns-left: 20px;
-  --wb-bg: #000000;
-  --wb-hbg: #000000;
-  --my-settings-label-color: #03a5ce;
-  */
-
-  /* ghost theme
-  --body-bg: #16171b;
-  --messenger-bg: transparent;
-  --messenger-private-bg: black;
-  --left-message-bg: rgba(0, 0, 0, 0.7);
-  --private-msg-bg: rgba(252, 110, 110, 0.7);
-  --right-msg-bg: rgba(0, 0, 0, 0.7);
-  --box-shadow: "0px"; 
-  --btn-bg: transparent;
-  --btn-color: white;
-  --btn-opc: 0.7;
-  --btns-left: 20px;
-  --wb-bg: transparent;
-  --wb-hbg: #000000;
-  --my-settings-label-color: limegreen;
-  */
 
   /* https://developer.mozilla.org/it/docs/Web/CSS/object-fit */
   --video-object-fit: cover;
@@ -159,7 +92,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  opacity: 0; /* make things invisible upon start */
+  opacity: 0; /* invisible when page loads */
   -webkit-animation: fadeIn ease-in 1;
   -moz-animation: fadeIn ease-in 1;
   animation: fadeIn ease-in 1;
@@ -369,16 +302,12 @@ body {
 #shareTeamBtn,
 #audioToggleBtn,
 #videoToggleBtn,
-#shareScreenBtn,
-#recordScreenBtn,
 #fullScreenBtn,
 #swapCameraBtn,
 #chatRoomBtn,
 #myHandBtn,
 #whiteboardBtn,
 #fileShareBtn,
-#mySettingsBtn,
-#aboutBtn,
 #leaveRoomBtn {
   color: var(--btn-color);
 }
@@ -388,16 +317,12 @@ body {
 #shareTeamBtn:hover,
 #audioToggleBtn:hover,
 #videoToggleBtn:hover,
-#shareScreenBtn:hover,
-#recordStreamBtn:hover,
 #fullScreenBtn:hover,
 #swapCameraBtn:hover,
 #chatRoomBtn:hover,
 #myHandBtn:hover,
 #fileShareBtn:hover,
-#whiteboardBtn:hover,
-#mySettingsBtn:hover,
-#aboutBtn:hover {
+#whiteboardBtn:hover {
   color: #7B83EB;
   transform: var(--btns-hover-scale);
 }
@@ -522,15 +447,15 @@ body {
 /* left side */
 
 .left-message .msg-bubble {
-  background: var(--left-message-bg);
+  background: #464EB8;
   border-bottom-left-radius: 0;
-  color: #fff;
+  color: #464EB8;
 }
 
 .left-message .priv-msg-box {
   background: var(--private-msg-bg);
   border-bottom-left-radius: 0;
-  color: #fff;
+  color: #464EB8;
 }
 
 /* right side */
@@ -834,98 +759,7 @@ video:fullscreen {
   align-items: center;
 }
 
-/*--------------------------------------------------------------
-# My settings
---------------------------------------------------------------*/
 
-#mySettings {
-  display: none;
-  z-index: 15;
-  /* center */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* gui */
-  background-color: #7B83EB;
-  border-radius: 5px;
-  margin: auto;
-  box-shadow: var(--box-shadow);
-  padding: 10px;
-  /* fade in */
-  -webkit-animation: fadeIn ease-in 1;
-  -moz-animation: fadeIn ease-in 1;
-  animation: fadeIn ease-in 1;
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  animation-duration: 1s;
-  overflow: hidden;
-}
-
-#mySettingsHeader {
-  cursor: move;
-}
-
-#mySettings label {
-  width: 7em;
-  display: flex;
-  color: var(--my-settings-label-color);
-}
-
-#mySettings select {
-  width: var(--mySettings-select-w);
-  height: 30px;
-  color: #464EB8;
-  background-color: #eeeeee;
-  border-radius: 5px;
-}
-
-#mySettingsCloseBtn {
-  border: none;
-  font-size: 1.2rem;
-  background: transparent;
-  color: #464EB8;
-  transition: background 0.23s;
-}
-
-#mySettingsCloseBtn:hover {
-  color: white;
-  transform: var(--btns-hover-scale);
-  transition: all 0.3s ease-in-out;
-}
-
-#myPeerNameSet {
-  font-size: 1rem;
-  border: 1px solid black;
-  color: black;
-  background-color: white;
-}
-
-#myPeerNameSetBtn,
-#muteEveryoneBtn,
-#hideEveryoneBtn {
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 1rem;
-  color: white;
-  background-color: transparent;
-}
-
-#myPeerNameSetBtn:hover {
-  color: white;
-  transform: var(--btns-hover-scale);
-  transition: all 0.3s ease-in-out;
-}
-
-#muteEveryoneBtn:hover,
-#hideEveryoneBtn:hover {
-  color: white;
-  transform: var(--btns-hover-scale);
-  transition: all 0.3s ease-in-out;
-}
 
 /*--------------------------------------------------------------
 # Swal2
@@ -1074,24 +908,8 @@ progress {
   display: none;
 }
 
-/* about Sponsor btn 
-#sponsorBtn {
-  border: none;
-  width: 170px;
-  height: 40px;
-  font-size: 1.2rem;
-  background: linear-gradient(100deg, #376df9 0, #ff5fa0 75%, #ffc55a 100%);
-  box-shadow: 0 0 6px 0 rgb(251 255 0 / 82%);
-  color: #ffffff;
-  transition: background 0.23s;
-  cursor: pointer;
-}
-#sponsorBtn:hover {
-  font-weight: bold;
-} 
 
-/*
-z-index
+/*z-index
 7 statusMenu -----
 - peer name
 - hand status

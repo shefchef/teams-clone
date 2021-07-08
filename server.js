@@ -1,13 +1,4 @@
 /*
-http://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=Server
-
-███████ ███████ ██████  ██    ██ ███████ ██████  
-██      ██      ██   ██ ██    ██ ██      ██   ██ 
-███████ █████   ██████  ██    ██ █████   ██████  
-     ██ ██      ██   ██  ██  ██  ██      ██   ██ 
-███████ ███████ ██   ██   ████   ███████ ██   ██                                           
-*/
-/*
 dependencies: {
   compression : https://www.npmjs.com/package/compression
   dotenv      : https://www.npmjs.com/package/dotenv
@@ -110,8 +101,7 @@ app.get("/join/*", (req, res) => {
 });
 
 /**
-  Teams API v1
-  The response will give you a entrypoint / Room URL for your meeting.
+  The response will give us a URL for joining.
 */
 app.post(["/api/v1/meeting"], (req, res) => {
   // checking if the user was authorised for the call
@@ -164,14 +154,11 @@ function makeId(length) {
 // end of Teams API v1
 
 /**
- * You should probably use a different stun-turn server
- * doing commercial stuff, also see:
- *
  * https://gist.github.com/zziuni/3741933
  * https://www.twilio.com/docs/stun-turn
  * https://github.com/coturn/coturn
  *
- * Check the functionality of STUN/TURN servers:
+ *functionality of STUN/TURN servers:
  * https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/
  */
 let iceServers = [{ urls: "stun:stun.l.google.com:19302" }];
@@ -213,48 +200,7 @@ async function ngrokStart() {
   }
 }
 
-/**
- * Start Local Server with ngrok https tunnel (optional)
- */
-server.listen(PORT, null, () => {
-  logme(
-    `%c
-
-	███████╗██╗ ██████╗ ███╗   ██╗      ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗ 
-	██╔════╝██║██╔════╝ ████╗  ██║      ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗
-	███████╗██║██║  ███╗██╔██╗ ██║█████╗███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝
-	╚════██║██║██║   ██║██║╚██╗██║╚════╝╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗
-	███████║██║╚██████╔╝██║ ╚████║      ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║
-	╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝      ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝ started...
-
-	`,
-    "font-family:monospace"
-  );
-
-  // https tunnel
-  if (ngrokEnabled == "true") {
-    ngrokStart();
-  } else {
-    // server settings
-    logme("settings", {
-      http: localHost,
-      api_key_secret: API_KEY_SECRET,
-      iceServers: iceServers,
-    });
-  }
-});
-
-/**
- * Users will connect to the signaling server, after which they'll issue a "join"
- * to join a particular channel. The signaling server keeps track of all sockets
- * who are in a channel, and on join will send out 'addPeer' events to each pair
- * of users in a channel. When clients receive the 'addPeer' even they'll begin
- * setting up an RTCPeerConnection with one another. During this process they'll
- * need to relay ICECandidate information to one another, as well as SessionDescription
- * information. After all of that happens, they'll finally be able to complete
- * the peer connection and will be in streaming audio/video between eachother.
- * On peer connected
- */
+/* --------------------------------------- */
 io.sockets.on("connect", (socket) => {
   logme("[" + socket.id + "] --> connection accepted");
 
@@ -330,7 +276,7 @@ io.sockets.on("connect", (socket) => {
   });
 
   /**
-   * Remove peers from channel aka room
+   * Remove peers from channel
    * @param {*} channel
    */
   async function removePeerFrom(channel) {
@@ -539,59 +485,6 @@ io.sockets.on("connect", (socket) => {
             peer_name: peer_name,
             element: element,
             status: status,
-          });
-        }
-      }
-    }
-  });
-
-  /**
-   * Relay mute everyone in the room
-   */
-  socket.on("muteEveryone", (config) => {
-    let peerConnections = config.peerConnections;
-    let room_id = config.room_id;
-    let peer_name = config.peer_name;
-
-    // socket.id aka peer that send this status
-    if (Object.keys(peerConnections).length != 0) {
-      logme(
-        "[" + socket.id + "] emit onmuteEveryone to [room_id: " + room_id + "]",
-        {
-          peer_id: socket.id,
-          peer_name: peer_name,
-        }
-      );
-      for (let peer_id in peerConnections) {
-        if (sockets[peer_id]) {
-          sockets[peer_id].emit("onmuteEveryone", {
-            peer_name: peer_name,
-          });
-        }
-      }
-    }
-  });
-
-  /**
-   * Relay hide everyone in the room
-   */
-  socket.on("hideEveryone", (config) => {
-    let peerConnections = config.peerConnections;
-    let room_id = config.room_id;
-    let peer_name = config.peer_name;
-
-    // socket.id aka peer that send this status
-    if (Object.keys(peerConnections).length != 0) {
-      logme(
-        "[" + socket.id + "] emit onhideEveryone to [room_id: " + room_id + "]",
-        {
-          peer_name: peer_name,
-        }
-      );
-      for (let peer_id in peerConnections) {
-        if (sockets[peer_id]) {
-          sockets[peer_id].emit("onhideEveryone", {
-            peer_name: peer_name,
           });
         }
       }

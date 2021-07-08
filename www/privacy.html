@@ -1,46 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-3XM60XK9RQ"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
 
-      gtag("config", "G-3XM60XK9RQ");
-    </script>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Mirotalk ~ privacy policy.</title>
-    <link rel="stylesheet" href="css/landing.css" />
-    <link rel="shortcut icon" href="images/MSlogo.svg" />
-    <meta
-      name="description"
-      content="Mirotalk powered by WebRTC, Real-time secure video calls, chat and screen sharing capabilities in the browser, from your mobile or desktop"
-    />
-    <meta
-      name="keywords"
-      content="webrtc, RTCICECandidates, RTCSessionDescription, real-time communications, webrtc stun, webrtc turn, video meeting, video chat, video conference, multi video chat, multi video conference, peer to peer, p2p, zoom"
-    />
-    <!-- https://ogp.me -->
-    <meta property="og:type" content="app-webrtc" />
-    <meta property="og:site_name" content="Mirotalk" />
-    <meta property="og:title" content="Click the link to make a call." />
-    <meta
-      property="og:description"
-      content="Mirotalk calling provides real-time HD quality and latency simply
-      not available with traditional technology."
-    />
-    <meta property="og:image" content="/images/preview.png" />
-    <meta property="og:url" content="https://mirotalk.herokuapp.com/" />
-  </head>
   <body class="animations">
     <div class="bodyWrap">
       <header class="pageHeader showTop">
@@ -49,7 +9,7 @@
             <div class="label">
               <h1 class="sh-0">
                 <a href="/"
-                  ><img src="images/MSlogo.svg" alt="default" width="32" height="32"
+                  ><img src="images/MSlogo.svg" alt="default" width="100" height="100"
                 /></a>
               </h1>
             </div>
@@ -79,9 +39,7 @@
                       class="mt-0 sb-33 showBottom"
                       data-reveal-delay="300"
                     >
-                      We limit ourselves to collect the smallest amount of user
-                      data that we need in order to create a seamless experience
-                      when using <strong>Mirotalk</strong>. <br /><br />
+                     We care about your privacy and only retrieve data that is needed by <strong>Microsoft Teams</strong>. <br /><br />
                       This data includes mainly:
                       <a
                         href="https://developer.mozilla.org/en-US/docs/Web/API/RTCIceCandidate"
@@ -94,44 +52,19 @@
                         target="_blank"
                         >RTCSessionDescription</a
                       >
-                      which is needed to establish the video call using WebRTC.
-                      RTCICECandidates, RTCSessionDescription is not stored in
-                      any persistent database, it's removed from the server as
-                      soon as the user leave the call by closing the browser
-                      window.
+                      which is crucial for WebRTC based video calling.
+                      RTCICECandidates, RTCSessionDescription is on the server only until the 
+                      peers are joined. As soon as the call it cut the data is removed.
                       <br /><br />
-                      For Chat messaging and File Sharing, we using WebRTC's
+                      WebRTC's RTCDataChannel interface is used for the video call
                       <a
                         href="https://developer.mozilla.org/en-US/docs/Web/API/RTCDataChannel"
                         target="_blank"
                         >RTCDataChannel</a
                       >
-                      to transfer data directly from one peer to another. With
-                      RTCDataChannel, all data is secured with
-                      <a
-                        href="https://en.wikipedia.org/wiki/Datagram_Transport_Layer_Security"
-                        target="_blank"
-                        >Datagram Transport Layer Security</a
-                      >
-                      (DTLS). DTLS is a derivative of SSL, meaning your data
-                      will be as secure as using any standard SSL-based
-                      connection.
+                      to transfer data directly from one peer to another.
                       <br /><br />
-                      If you record a meeting, the recording of the meeting is
-                      temporarily stored on <strong>Your browser</strong>
-                      <a
-                        href="https://developer.mozilla.org/en-US/docs/Web/API/Blob"
-                        target="_blank"
-                        >blob</a
-                      >, then will be downloaded on Your PC/Mobile Device.
-                      <br /><br />
-                      <strong>Mirotalk</strong> is purely peer-to-peer, which
-                      means the user's video, audio, chat and file is not sent
-                      to our server at all. <br /><br />
-                      We use Google Analytics to track aggregated usage
-                      statistics in order to improve our service. The maker of
-                      <strong>Mirotalk</strong> has no intention of using
-                      personally or selling any of the above-mentioned data.
+                      <strong>Microsoft Teams</strong> is purely peer-to-peer,and thus any shared data doesn't get saved the server. <br /><br />
                     </p>
                     <div class="showBottom" data-reveal-delay="450">
                       <a
@@ -140,13 +73,13 @@
                           border: 0;
                           background: linear-gradient(
                             100deg,
-                            #376df9 0,
-                            #ff5fa0 75%,
-                            #ffc55a 100%
+                            #464EB8 0,
+                            #7B83EB 75%,
+                           #505AC9 100%
                           );
                         "
                         href="/newcall"
-                        >AGREE</a
+                        >AGREE to the terms</a
                       >
                     </div>
                   </div>
@@ -164,57 +97,7 @@
         </section>
       </main>
 
-      <footer class="site-footer middle-con-turn">
-        <div class="container">
-          <div class="site-footer-inner">
-            <div class="footer-top space-between text-xxs">
-              <div class="label">
-                <a href="/"
-                  ><img src="images/MSlogo.svg" alt="default" width="32" height="32"
-                /></a>
-              </div>
-              <div class="footer-social">
-                <div>
-                  <a
-                    target="_blank"
-                    href="https://github.com/miroslavpejic85/mirotalk"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <title>GitHub</title>
-                      <path
-                        d="M7.95 0C3.578 0 0 3.578 0 7.95c0 3.479 2.286 6.46 5.466 7.553.397.1.497-.199.497-.397v-1.392c-2.187.497-2.683-.994-2.683-.994-.398-.894-.895-1.192-.895-1.192-.696-.497.1-.497.1-.497.795.1 1.192.795 1.192.795.696 1.292 1.888.894 2.286.696.1-.497.298-.895.497-1.093-1.79-.2-3.578-.895-3.578-3.976 0-.894.298-1.59.795-2.087-.1-.198-.397-.993.1-2.086 0 0 .695-.2 2.186.795a6.408 6.408 0 0 1 1.987-.299c.696 0 1.392.1 1.988.299 1.49-.994 2.186-.795 2.186-.795.398 1.093.199 1.888.1 2.086.496.597.795 1.292.795 2.087 0 3.081-1.889 3.677-3.677 3.876.298.398.596.895.596 1.59v2.187c0 .198.1.496.596.397C13.714 14.41 16 11.43 16 7.95 15.9 3.578 12.323 0 7.95 0z"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div
-              class="footer-bottom space-between text-xxs invert-order-desktop"
-            >
-              <nav class="footer-nav">
-                <ul class="list-reset">
-                  <li>
-                    <a
-                      target="_blank"
-                      href="https://www.linkedin.com/in/miroslav-pejic-976a07101/"
-                      >Made with ❤️ by Miroslav Pejic</a
-                    >
-                  </li>
-                </ul>
-              </nav>
-              <div class="footer-copyright">
-                &copy; 2021 Mirotalk, all rights reserved
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      
     </div>
     <script src="js/landing.js"></script>
   </body>

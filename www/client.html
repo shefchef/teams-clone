@@ -2,20 +2,6 @@
 <html lang="en">
   <head>
     <title>Microsoft Teams | Group Chat Service</title>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!--<script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-3XM60XK9RQ"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-3XM60XK9RQ");
-    </script> -->
     
     <link
       rel="icon"
@@ -40,7 +26,7 @@
 
     <!-- show this before to join -->
     <div id="loadObj">
-      <h1 class="pulsate">Loading...</h1>
+      <h1 class="pulsate">Connecting...</h1>
       <pre>
 Please allow camera & microphone
 access to use this app.
@@ -54,21 +40,17 @@ access to use this app.
       <button id="shareTeamBtn" class="fas fa-users"></button>
       <button id="audioToggleBtn" class="fas fa-microphone"></button>
       <button id="videoToggleBtn" class="fas fa-video"></button>
-      <!-- <button id="swapCameraBtn" class="fas fa-sync-alt"></button> -->
       <button id="shareScreenBtn" class="fas fa-desktop"></button>
-      <!--<button id="recordScreenBtn" class="fas fa-record-vinyl"></button>-->
       <button id="fullScreenBtn" class="fas fa-expand-alt"></button>
       <button id="chatRoomBtn" class="fas fa-comment"></button>
       <button id="myHandBtn" class="fas fa-hand-paper"></button>
       <button id="whiteboardBtn" class="fas fa-chalkboard-teacher"></button>
       <button id="fileShareBtn" class="fas fa-folder-open"></button>
-     <!-- <button id="mySettingsBtn" class="fas fa-cogs"></button>
-      <button id="aboutBtn" class="fas fa-question"></button> -->
       <button id="leaveRoomBtn" class="fas fa-phone-slash"></button>
     </div>
     <!-- End left buttons -->
 
-    <!-- Start chat room 
+    <!-- Start chat service
     https://codepen.io/sajadhsm/pen/odaBdd
     https://getemoji.com
     -->
@@ -79,7 +61,6 @@ access to use this app.
             <i class="fas fa-comment-alt"></i> Chat
           </div>
           <div class="messenger-header-options">
-            <!-- <button id="messengerTheme" class="fas fa-ghost"></button> -->
             <button id="messengerCPBtn" class="fas fa-users"></button>
             <button id="messengerClean" class="fas fa-trash"></button>
             <button id="messengerSaveBtn" class="fas fa-save"></button>
@@ -87,80 +68,8 @@ access to use this app.
           </div>
         </header>
 
-        <!-- public messages example -->
+        <!-- public message -->
         <main id="messengerChat" class="messenger-chat">
-          <!--<div class="msg left-message">
-            <div
-              class="msg-img"
-              style="
-                background-image: url('https://eu.ui-avatars.com/api?name=Friends Name&size=24&background=random&rounded=true');
-              "
-            ></div>
-
-            <div class="msg-bubble">
-              <div class="msg-info">
-                <div class="msg-info-name">Other</div>
-                <div class="msg-info-time">00:00:00</div>
-              </div>
-
-              <div class="msg-text">Message example</div>
-            </div>
-          </div> -->
-
-          <!-- div class="msg right-msg">
-            <div
-              class="msg-img"
-              style="
-                background-image: url('https://eu.ui-avatars.com/api?name=Your Name&size=24&background=random&rounded=true');
-              "
-            ></div>
-
-            <div class="msg-bubble">
-              <div class="msg-info">
-                <div class="msg-info-name">You</div>
-                <div class="msg-info-time">00:00:00</div>
-              </div>
-
-              <div class="msg-text">Message example</div>
-            </div>
-          </div> -->
-
-          <!-- private message example -->
-          <!--<div class="msg left-message">
-            <div
-              class="msg-img"
-              style="
-                background-image: url('https://eu.ui-avatars.com/api?name=Friends Name&size=24&background=random&rounded=true');
-              "
-            ></div>
-
-            <div class="priv-msg-box">
-              <div class="msg-info">
-                <div class="msg-info-name">Other</div>
-                <div class="msg-info-time">00:00:00</div>
-              </div>
-
-              <div class="msg-text">Message example</div>
-            </div>
-          </div> -->
-
-          <!-- <div class="msg right-msg">
-            <div
-              class="msg-img"
-              style="
-                background-image: url('https://eu.ui-avatars.com/api?name=Your Name&size=24&background=random&rounded=true');
-              "
-            ></div> -->
-
-            <!-- <div class="priv-msg-box">
-              <div class="msg-info">
-                <div class="msg-info-name">You</div>
-                <div class="msg-info-time">00:00:00</div>
-              </div>
-
-              <div class="msg-text">Message example</div>
-            </div>
-          </div> -->
         </main>
 
         <div class= "messenger-inputarea">
@@ -174,7 +83,7 @@ access to use this app.
           <button id="messengerSendBtn" class="fas fa-paper-plane"></button>
         </div>
       </section>
-
+      <!-- public message end-->
       <!-- Start private msg -->
       <section id="messengerCP">
         <section id="messengerCPSec" class="messenger">
@@ -202,75 +111,11 @@ access to use this app.
       <header id="messengerEmojiHeader">
         <button id="messengerCloseEmojiBtn" class="fas fa-times"></button>
       </header>
-      <emoji-picker class="dark"></emoji-picker>
-      <!-- <emoji-picker class="light"></emoji-picker> -->
+      <emoji-picker class="light"></emoji-picker>
     </section>
     <!-- End emoji picker -->
 
-    <!-- Start my settings -->
-    <!--<section id="mySettings">
-      <header id="mySettingsHeader">
-        <button id="mySettingsCloseBtn" class="fas fa-times"></button>
-      </header>
-      <main>
-        <br />
-        <div>
-          <label>My name:&nbsp;</label><br /><input
-            id="myPeerNameSet"
-            type="text"
-            placeholder="Change name..."
-          />&nbsp;&nbsp;<button
-            id="myPeerNameSetBtn"
-            class="fas fa-paper-plane"
-          >
-            Apply
-          </button>
-        </div>
-        <br />
-        <div>
-          <label>Room actions:&nbsp;</label><br />
-          <button id="muteEveryoneBtn" class="fas fa-microphone">
-            Mute everyone</button
-          >&nbsp;&nbsp;
-          <button id="hideEveryoneBtn" class="fas fa-video">
-            Hide everyone
-          </button>
-        </div>
-        <br />
-        <div>
-          <label for="audioSource">Microphone:&nbsp;</label><br /><select
-            id="audioSource"
-          ></select>
-        </div>
-        <br />
-        <div>
-          <label for="audioOutput"> Sound:&nbsp;</label><br /><select
-            id="audioOutput"
-          ></select>
-        </div>
-        <br />
-        <div>
-          <label for="videoSource">Video :&nbsp;</label><br /><select
-            id="videoSource"
-          ></select>
-        </div>
-        <br />
-        <div>
-          <label for="microsoftTeams">Theme:&nbsp;</label><br /><select
-            id="microsoftTeams"
-          >
-            <option value="default"> Teams - default</option>
-            <option value="dark">Teams - dark</option>
-            <option value="forest">Teams - forest</option>
-            <option value="sky">Teams - sky</option>
-            <option value="ghost">Teams - ghost</option>
-          </select>
-        </div>
-      </main>
-    </section> -->
-    <!-- End my settings -->
-
-    <!-- Whiteboard start -->
+    <!-- Whiteboard starting-->
     <div class="whiteboard-cont">
       <div class="colors-container">
         <button id="whiteboardCloseBtn" class="fas fa-times"></button>
@@ -301,7 +146,7 @@ access to use this app.
       </div>
       <canvas id="whiteboard"></canvas>
     </div>
-    <!-- Whiteboard Finish -->
+    <!-- Whiteboard End -->
 
     <!-- Start File Send -->
     <div id="shareFileDiv">
@@ -329,10 +174,7 @@ access to use this app.
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/client.js"></script>
-    <!-- end of Js scripts -->
+    <!-- end JS scripts -->
 
-    <!-- 
-		the <video> and <audio> tags are all added and removed dynamically
-		in 'onAddStream', 'setupLocalMedia', and 'removePeer'/'disconnect'
-		--></body>
+    </body>
 </html>

@@ -1,29 +1,31 @@
+//Random adjectives and nouns for a unique team name suggestion
+
 let adjectives = [
-  "small",
-  "big",
+  "petite",
+  "huge",
   "large",
-  "smelly",
+  "stinky",
   "new",
-  "happy",
-  "shiny",
+  "elated",
+  "sparkly",
   "old",
-  "clean",
-  "nice",
+  "clear",
+  "good",
   "bad",
   "cool",
   "hot",
-  "cold",
-  "warm",
+  "colder",
+  "warmer",
   "hungry",
-  "slow",
+  "speedy",
   "fast",
-  "red",
-  "white",
+  "purple",
+  "smokey",
   "black",
-  "blue",
   "green",
-  "basic",
-  "strong",
+  "teal",
+  "based",
+  "wealthy",
   "cute",
   "poor",
   "nice",
@@ -36,19 +38,19 @@ let adjectives = [
   "tiny",
   "great",
   "long",
-  "single",
+  "taken",
   "rich",
   "young",
   "dirty",
-  "fresh",
-  "brown",
+  "stale",
+  "bleached",
   "dark",
   "crazy",
   "sad",
   "loud",
   "brave",
   "calm",
-  "silly",
+  "stupid",
   "smart",
 ];
 
@@ -117,6 +119,7 @@ let nouns = [
   "swan",
 ];
 
+//function to determine a random team name
 function getRandomNumber(length) {
   let result = "";
   let characters = "0123456789";
@@ -138,7 +141,7 @@ document.getElementById("roomName").value = "";
 
 let i = 0;
 let txt = num + adjective + noun;
-let speed = 100;
+let speed = 120;
 
 typeWriter();
 
