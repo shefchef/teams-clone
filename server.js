@@ -158,7 +158,7 @@ function makeId(length) {
  * https://www.twilio.com/docs/stun-turn
  * https://github.com/coturn/coturn
  *
- *functionality of STUN/TURN servers:
+ * Check the functionality of STUN/TURN servers:
  * https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/
  */
 let iceServers = [{ urls: "stun:stun.l.google.com:19302" }];
@@ -200,7 +200,48 @@ async function ngrokStart() {
   }
 }
 
-/* --------------------------------------- */
+/**
+ * Start Local Server with ngrok https tunnel (optional)
+ */
+server.listen(PORT, null, () => {
+  logme(
+    `%c
+
+	███████╗██╗ ██████╗ ███╗   ██╗      ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗ 
+	██╔════╝██║██╔════╝ ████╗  ██║      ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗
+	███████╗██║██║  ███╗██╔██╗ ██║█████╗███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝
+	╚════██║██║██║   ██║██║╚██╗██║╚════╝╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗
+	███████║██║╚██████╔╝██║ ╚████║      ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║
+	╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝      ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝ started...
+
+	`,
+    "font-family:monospace"
+  );
+
+  // https tunnel
+  if (ngrokEnabled == "true") {
+    ngrokStart();
+  } else {
+    // server settings
+    logme("settings", {
+      http: localHost,
+      api_key_secret: API_KEY_SECRET,
+      iceServers: iceServers,
+    });
+  }
+});
+
+/**
+ * Users will connect to the signaling server, after which they'll issue a "join"
+ * to join a particular channel. The signaling server keeps track of all sockets
+ * who are in a channel, and on join will send out 'addPeer' events to each pair
+ * of users in a channel. When clients receive the 'addPeer' even they'll begin
+ * setting up an RTCPeerConnection with one another. During this process they'll
+ * need to relay ICECandidate information to one another, as well as SessionDescription
+ * information. After all of that happens, they'll finally be able to complete
+ * the peer connection and will be in streaming audio/video between eachother.
+ * On peer connected
+ */
 io.sockets.on("connect", (socket) => {
   logme("[" + socket.id + "] --> connection accepted");
 
@@ -276,7 +317,7 @@ io.sockets.on("connect", (socket) => {
   });
 
   /**
-   * Remove peers from channel
+   * Remove peers from channel aka room
    * @param {*} channel
    */
   async function removePeerFrom(channel) {
