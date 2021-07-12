@@ -106,7 +106,7 @@ body {
 }
 
 /*--------------------------------------------------------------
-# Loading...
+# Connecting.....
 --------------------------------------------------------------*/
 
 #loadObj {
@@ -170,7 +170,7 @@ body {
 }
 
 /*--------------------------------------------------------------
-# Status menù (time-name-audio-video)
+# Status menu
 --------------------------------------------------------------*/
 
 .statusMenu {
@@ -222,7 +222,7 @@ body {
 .statusMenu p:hover,
 .statusMenu h4:hover,
 .statusMenu button:hover {
-  color: #7B83EB;
+  color: whitesmoke;
   transition: all 0.3s ease-in-out;
 }
 
@@ -293,7 +293,7 @@ body {
   border-radius: 5px;
   width: 40px;
   background: white;
-  color: black;
+  color: #464EB8;
   font-size: 1.5rem;
   padding: 4px;
   transition: all 0.3s ease-in-out;
@@ -308,6 +308,7 @@ body {
 #myHandBtn,
 #whiteboardBtn,
 #fileShareBtn,
+#shareScreenBtn,
 #leaveRoomBtn {
   color: var(--btn-color);
 }
@@ -322,6 +323,7 @@ body {
 #chatRoomBtn:hover,
 #myHandBtn:hover,
 #fileShareBtn:hover,
+#shareScreenBtn:hover,
 #whiteboardBtn:hover {
   color: #7B83EB;
   transform: var(--btns-hover-scale);
@@ -379,7 +381,7 @@ body {
 }
 
 /*--------------------------------------------------------------
-# Chat room header
+# Chat room
 --------------------------------------------------------------*/
 
 .messenger-header {
@@ -477,7 +479,7 @@ body {
   margin: 0 0 0 10px;
 }
 
-/* common */
+/* common chat */
 
 .msg-img {
   width: 50px;
@@ -524,7 +526,7 @@ body {
 }
 
 /*--------------------------------------------------------------
-# Chat room input area
+# Chat room input
 --------------------------------------------------------------*/
 
 .messenger-inputarea {

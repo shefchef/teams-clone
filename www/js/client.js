@@ -148,6 +148,8 @@ let sendInProgress = false;
 let fsDataChannelOpen = false;
 const chunkSize = 16 * 1024; //16kb
 
+let videoSelect;
+let audioInputSelect;
 /**
  * Load all Html elements by Id
  */
@@ -211,7 +213,9 @@ function getHtmlElementsById() {
   progressReport = getId("progressReport");
   sendAbortBtn = getId("sendAbortBtn");
 }
-
+const videoElem = document.getElementById("video");
+videoSelect = getId("videoSource");
+audioInputSelect = getId("audioSource");
 /**
  * Tippy.js for js functionality
  * https://atomiks.github.io/tippyjs/
@@ -1431,7 +1435,6 @@ function setShareScreenBtn() {
     shareScreenBtn.style.display = "none";
   }
 }
-
 /**
  * Full screen button click event
  */
@@ -2023,6 +2026,40 @@ function swapCamera() {
  */
 function stopLocalVideoTrack() {
   localMediaStream.getVideoTracks()[0].stop();
+}
+ audioInputSelect.addEventListener("change", (e) => {
+  myVideoChange = false;
+  /*refreshLocalMedia();*/
+});
+videoSelect.addEventListener("change", (e) => {
+    myVideoChange = true;
+    /*refreshLocalMedia();*/
+  });
+/**
+ * Get audio - video constraints
+ * @returns constraints
+ */
+ function getAudioVideoConstraints() {
+  const audioSource = audioInputSelect.value;
+  const videoSource = videoSelect.value;
+  let videoConstraints = getVideoConstraints(
+    videoQualitySelect.value ? videoQualitySelect.value : "default"
+  );
+  videoConstraints["deviceId"] = videoSource
+    ? { exact: videoSource }
+    : undefined;
+  const constraints = {
+    audio: { deviceId: audioSource ? { exact: audioSource } : undefined },
+    video: videoConstraints,
+  };
+  return constraints;
+}
+
+function stopCapture() {
+  let tracks = screenMediaPromise.getTracks();
+
+  tracks.forEach(track => track.stop());
+  screenMediaPromise = null;
 }
 
 /**

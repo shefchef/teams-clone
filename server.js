@@ -75,6 +75,11 @@ app.get(["/newcall"], (req, res) => {
   res.sendFile(path.join(__dirname, "www/newcall.html"));
 });
 
+// chat room
+app.get(["/chat"], (req, res) => {
+  res.sendFile(path.join(__dirname, "www/chat.html"));
+});
+
 // if not allow video/audio
 app.get(["/permission"], (req, res) => {
   res.sendFile(path.join(__dirname, "www/permission.html"));
