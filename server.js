@@ -15,7 +15,7 @@ const compression = require("compression");
 const express = require("express");
 const path = require("path");
 const app = express();
-app.use(compression()); // Compress all HTTP responses GZip
+app.use(compression()); // Compressing all HTTP responses 
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -23,11 +23,11 @@ const io = new Server().listen(server);
 const ngrok = require("ngrok");
 
 let API_KEY_SECRET = process.env.API_KEY_SECRET || "teams_default_secret";
-let PORT = process.env.PORT || 3000; // signalingServerPort
-let localHost = "http://localhost:" + PORT; // http
-let channels = {}; // collect channels
-let sockets = {}; // collect sockets
-let peers = {}; // collect peers info grp by channels
+let PORT = process.env.PORT || 3000; // server PORT
+let localHost = "http://localhost:" + PORT; 
+let channels = {}; // collecting channels
+let sockets = {}; // collecting sockets
+let peers = {}; // collect peer info
 
 let ngrokEnabled = process.env.NGROK_ENABLED;
 let ngrokAuthToken = process.env.NGROK_AUTH_TOKEN;
@@ -36,13 +36,13 @@ let turnUrls = process.env.TURN_URLS;
 let turnUsername = process.env.TURN_USERNAME;
 let turnCredential = process.env.TURN_PASSWORD;
 
-// Use all static files from the www folder
+// Using files from the www folder
 app.use(express.static(path.join(__dirname, "www")));
 
 // Api parse body data as json
 app.use(express.json());
 
-// Remove trailing slashes in url handle bad requests
+// Remove trailing slashes in url handle and bad requests
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
     logme("Request Error", {
@@ -65,7 +65,7 @@ app.get(["/"], (req, res) => {
   res.sendFile(path.join(__dirname, "www/client.html"))
 }); */
 
-// all start from here
+// Start here
 app.get(["/"], (req, res) => {
   res.sendFile(path.join(__dirname, "www/landing.html"));
 });
@@ -90,12 +90,12 @@ app.get(["/privacy"], (req, res) => {
   res.sendFile(path.join(__dirname, "www/privacy.html"));
 });
 
-// no room name specified to join
+// no team name specified to join
 app.get("/join/", (req, res) => {
   res.redirect("/");
 });
 
-// join to room
+// join to team
 app.get("/join/*", (req, res) => {
   if (Object.keys(req.query).length > 0) {
     logme("redirect:" + req.url + " to " + url.parse(req.url).pathname);
@@ -134,8 +134,6 @@ app.post(["/api/v1/meeting"], (req, res) => {
 
 /**
  * Get get Meeting Room URL
- * @param {*} host string
- * @returns meeting Room URL
  */
 function getMeetingURL(host) {
   return "http" + (host.includes("localhost") ? "" : "s") + "://" + host;
@@ -143,8 +141,6 @@ function getMeetingURL(host) {
 
 /**
  * Generate random Id
- * @param {*} length int
- * @returns random id
  */
 function makeId(length) {
   let result = "";
@@ -236,15 +232,14 @@ server.listen(PORT, null, () => {
   }
 });
 
-/**
- */
+
 io.sockets.on("connect", (socket) => {
   logme("[" + socket.id + "] --> connection accepted");
 
   socket.channels = {};
   sockets[socket.id] = socket;
 
-  /**
+  /*
    * On peer diconnected
    */
   socket.on("disconnect", () => {
@@ -271,12 +266,12 @@ io.sockets.on("connect", (socket) => {
       logme("[" + socket.id + "] [Warning] already joined", channel);
       return;
     }
-    // no channel aka room in channels init
+    // no channel aka team in channels init
     if (!(channel in channels)) {
       channels[channel] = {};
     }
 
-    // no channel aka room in peers init
+    // no channel aka team in peers init
     if (!(channel in peers)) {
       peers[channel] = {};
     }
@@ -313,8 +308,7 @@ io.sockets.on("connect", (socket) => {
   });
 
   /**
-   * Remove peers from channel aka room
-   * @param {*} channel
+   * Remove peers from channel aka team
    */
   async function removePeerFrom(channel) {
     if (!(channel in socket.channels)) {
@@ -326,7 +320,7 @@ io.sockets.on("connect", (socket) => {
     delete channels[channel][socket.id];
     delete peers[channel][socket.id];
 
-    // if not channel aka room in peers remove it
+    // if not channel aka team in peers remove it
     if (Object.keys(peers[channel]).length === 0) {
       delete peers[channel];
     }
@@ -480,7 +474,7 @@ io.sockets.on("connect", (socket) => {
     let element = config.element;
     let status = config.status;
 
-    // update peers video-audio status in the specified room
+    // update peers video-audio status in the specified team
     for (let peer_id in peers[room_id]) {
       if (peers[room_id][peer_id]["peer_name"] == peer_name) {
         switch (element) {
@@ -529,7 +523,7 @@ io.sockets.on("connect", (socket) => {
   });
 
   /**
-   * Relay Kick out peer from room
+   * Relay Kick out peer from team
    */
   socket.on("kickOut", (config) => {
     let room_id = config.room_id;

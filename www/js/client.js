@@ -2598,8 +2598,6 @@ function downloadChatMsgs() {
 /**
  * Make chat room draggable
  * https://www.w3schools.com/howto/howto_js_draggable.asp
- * @param {*} elmnt
- * @param {*} dragObj
  */
 function dragElement(elmnt, dragObj) {
   let pos1 = 0,
@@ -2687,7 +2685,6 @@ function setMyHandStatus() {
 
 /**
  * Set My Audio Status Icon and Title
- * @param {*} status
  */
 function setMyAudioStatus(status) {
   myAudioStatusIcon.className = "fas fa-microphone" + (status ? "" : "-slash");
@@ -3355,52 +3352,6 @@ function bytesToSize(bytes) {
   return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
 }
 
-
-
-/**
- * Mute or Hide everyone except yourself
- * @param {*} element audio/video
- */
-function disableAllPeers(element) {
-  if (!thereIsPeerConnections()) {
-    userLog("info", "No participants detected");
-    return;
-  }
-  Swal.fire({
-    background: swalBackground,
-    position: "center",
-    imageAlt: "teams-disable-" + element,
-    imageUrl: confirmImg,
-    title:
-      element == "audio"
-        ? "Mute everyone except yourself?"
-        : "Hide everyone except yourself?",
-    text:
-      element == "audio"
-        ? "Once muted, you won't be able to unmute them, but they can unmute themselves at any time."
-        : "Once hided, you won't be able to unhide them, but they can unhide themselves at any time.",
-    showDenyButton: true,
-    confirmButtonText: element == "audio" ? `Mute` : `Hide`,
-    denyButtonText: `Cancel`,
-    showClass: {
-      popup: "animate__animated animate__fadeInDown",
-    },
-    hideClass: {
-      popup: "animate__animated animate__fadeOutUp",
-    },
-  }).then((result) => {
-    if (result.isConfirmed) {
-      switch (element) {
-        case "audio":
-          muteEveryone();
-          break;
-        case "video":
-          hideEveryone();
-          break;
-      }
-    }
-  });
-}
 
 /**
  * Kick out a peer
